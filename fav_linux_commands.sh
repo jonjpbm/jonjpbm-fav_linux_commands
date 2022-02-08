@@ -6,7 +6,7 @@ date -d @1381176731
 date +%m%d%H%M
 //Output: 03181706
 
-//Example of using xargs. Use this kind of scenario quiote often.
+//Example of using xargs. Use this kind of scenario quite often.
 echo -e "1383095013\n1383095012\n1383095012\n1383095012\n1383095013\n1383095013" | xargs -I {} date -d @{}
 
 //Trims down extra spaces in a string down to just one space between individual strings
