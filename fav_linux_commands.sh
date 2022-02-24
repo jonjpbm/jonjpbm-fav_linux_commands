@@ -64,17 +64,63 @@ Conversely, :%s/.*/\U&/ will change all the characters to uppercase.
 :g/^$/d
 
 
-******** HOW-TO *********
+#******** HOW-TO *********#
 # Check if parameter was passed in a bash script
-if [ $# -eq 0 ]
-  then
-    echo "No arguments supplied"
-fi
-#The $# variable will tell you the number of input arguments the script was passed.
+  if [ $# -eq 0 ]
+    then
+      echo "No arguments supplied"
+  fi
+  #The $# variable will tell you the number of input arguments the script was passed.
 
-#Or you can check if an argument is an empty string or not like:
-if [ -z "$1" ]
-  then
-    echo "No argument supplied"
-fi
-#The -z switch will test if the expansion of "$1" is a null string or not. If it is a null string then the body is executed.
+  #Or you can check if an argument is an empty string or not like:
+  if [ -z "$1" ]
+    then
+      echo "No argument supplied"
+  fi
+  #The -z switch will test if the expansion of "$1" is a null string or not. If it is a null string then the body is executed.
+
+# Convert from and to UTC
+# UTC Conversion
+function to_utc () {
+  if [ -z "${1}" ];then
+    date -u
+    TZ=":US/Eastern" date
+    TZ=":US/Central" date
+    TZ=":US/Mountain" date
+    TZ=":US/Arizona" date
+    TZ=":US/Pacific" date
+    TZ=":US/Alaska" date
+    TZ=":US/Hawaii" date
+    unset TZ
+  else
+    gdate --date="TZ=\":US/Central\" ${1}" -u
+  fi
+}
+alias utc="to_utc"
+
+# Convert utc time passed to now
+# NOTE: b/c this is on mac, I used coreutils tool gdate and NOT
+# the mac native date command
+function from_utc () {
+  gdate --date="TZ=\"UTC\" ${1}"
+}
+alias futc="from_utc"
+
+# Convert decimal to binary
+function decimal2binary () {
+  echo "obase=2;$1" | bc
+}
+
+alias d2b="decimal2binary"
+
+# Export AWS Profile
+function ExportAWSProfile () {
+  export AWS_PROFILE=${1}
+}
+alias eap="ExportAWSProfile"
+
+# Unset AWS Profile
+function UnsetAWSProfile () {
+  unset AWS_PROFILE
+}
+alias uap="UnsetAWSProfile"
