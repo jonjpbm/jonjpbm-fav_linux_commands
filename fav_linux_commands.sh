@@ -1,4 +1,4 @@
-********General*********
+#******** General *********#
 //convert seconds from epoch to date timestamp
 date -d @1381176731
 
@@ -38,11 +38,7 @@ for i in $(seq 1 10);do echo $i;done
 od -c
 
 
-
-
-
-
-********vi*********
+#******** vi *********#
 //Sort in VI
 //The number indicates what column you want to sort by
 :sort /.*\%1v/
@@ -66,3 +62,19 @@ Conversely, :%s/.*/\U&/ will change all the characters to uppercase.
 //g will execute a command on lines which match a regex. The regex is 'blank line' and the command is
 //d (delete)
 :g/^$/d
+
+
+******** HOW-TO *********
+# Check if parameter was passed in a bash script
+if [ $# -eq 0 ]
+  then
+    echo "No arguments supplied"
+fi
+#The $# variable will tell you the number of input arguments the script was passed.
+
+#Or you can check if an argument is an empty string or not like:
+if [ -z "$1" ]
+  then
+    echo "No argument supplied"
+fi
+#The -z switch will test if the expansion of "$1" is a null string or not. If it is a null string then the body is executed.
