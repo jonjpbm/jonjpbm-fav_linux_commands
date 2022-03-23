@@ -30,6 +30,8 @@ sed '$!N;s/\n/ /; $!N;s/\n/ /'
 
 //Remove new line w/ sed and make one single line
 sed ':a;N;$!ba;s/\n/ /g' tt
+// or
+tr '\n' ' ' < FileName
 
 //Simple one-line for loop to output numbers incremently
 for i in $(seq 1 10);do echo $i;done
