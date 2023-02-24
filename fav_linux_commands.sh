@@ -85,17 +85,17 @@ Conversely, :%s/.*/\U&/ will change all the characters to uppercase.
 # UTC Conversion
 function to_utc () {
   if [ -z "${1}" ];then
-    date -u
-    TZ=":US/Eastern" date
-    TZ=":US/Central" date
-    TZ=":US/Mountain" date
-    TZ=":US/Arizona" date
-    TZ=":US/Pacific" date
-    TZ=":US/Alaska" date
-    TZ=":US/Hawaii" date
+    date -u 
+    TZ=":US/Eastern" date "+%a %b %d %H:%M:%S %Z %z"
+    TZ=":US/Central" date "+%a %b %d %H:%M:%S %Z %z"
+    TZ=":US/Mountain" date "+%a %b %d %H:%M:%S %Z %z"
+    TZ=":US/Arizona" date "+%a %b %d %H:%M:%S %Z %z"
+    TZ=":US/Pacific" date "+%a %b %d %H:%M:%S %Z %z"
+    TZ=":US/Alaska" date "+%a %b %d %H:%M:%S %Z %z"
+    TZ=":US/Hawaii" date "+%a %b %d %H:%M:%S %Z %z"
     unset TZ
   else
-    gdate --date="TZ=\":US/Central\" ${1}" -u
+    gdate --date="TZ=\":US/Central\" ${1}" -u "+%a %b %d %H:%M:%S %Z %z"
   fi
 }
 alias utc="to_utc"
@@ -104,7 +104,7 @@ alias utc="to_utc"
 # NOTE: b/c this is on mac, I used coreutils tool gdate and NOT
 # the mac native date command
 function from_utc () {
-  gdate --date="TZ=\"UTC\" ${1}"
+  gdate --date="TZ=\"UTC\" ${1}" "+%a %b %d %H:%M:%S %Z %z"
 }
 alias futc="from_utc"
 
